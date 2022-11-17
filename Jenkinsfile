@@ -15,7 +15,7 @@ agent any
 	stage('Unit Test'){
 	steps {
 		script{
-        	sh python -m test.py --junit-xml=pytest_unit.xml source_directory/test/unit || true # tests may fail
+        	sh 'python -m test.py --junit-xml=testpy_unit.xml source_directory/test/unit || true # tests may fail'
         		}
     		}
 	}
@@ -24,7 +24,7 @@ agent any
 post {
 	always {
 		recordIssues enabledForFailure: true, tool: sonarQube()
-		junit testResults: 'logs/unitreport.xml'
+		junit testResults: 'logs/testpy_unit.xml'
 		}
 	}
 }
